@@ -1,3 +1,5 @@
+//Complete
+
 package task1606;
 
 import java.util.ArrayList;
@@ -31,17 +33,18 @@ public class Solution {
         PrintListThread firstThread = new PrintListThread("firstThread");
         PrintListThread secondThread = new PrintListThread("secondThread");
         firstThread.start();
+        firstThread.join();
         secondThread.start();
     }
 
     public static void printList(List<String> list, String threadName) {
         for (String item : list) {
-            System.out.println(String.format("%s : %s", threadName, item));
+            System.out.printf("%s : %s%n", threadName, item);
         }
     }
 
     public static List<String> getList(int n) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         if (n < 1) return result;
 
         for (int i = 0; i < n; i++) {
