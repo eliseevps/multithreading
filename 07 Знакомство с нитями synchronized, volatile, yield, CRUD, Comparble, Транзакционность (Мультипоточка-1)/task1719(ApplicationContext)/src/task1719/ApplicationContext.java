@@ -1,3 +1,5 @@
+//Complete
+
 package task1719;
 
 import java.util.HashMap;
@@ -25,11 +27,11 @@ public abstract class ApplicationContext<GenericsBean extends Bean> {
         parseAllClassesAndInterfaces();
     }
 
-    public GenericsBean getByName(String name) {
+    public synchronized GenericsBean getByName(String name) {
         return container.get(name);
     }
 
-    public GenericsBean removeByName(String name) {
+    public synchronized GenericsBean removeByName(String name) {
         return container.remove(name);
     }
 
