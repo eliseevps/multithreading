@@ -1,5 +1,9 @@
+//Complete
+
 package task1710;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,6 +68,63 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        //напишите тут ваш код
-    }
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        DateFormat dateFormatPrt = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+
+        switch (args[0]) {
+            case "-c" -> {
+                Date date = null;
+                try {
+                    date = dateFormat.parse(args[3]);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Person person;
+                if (args[2].equals("м")) {
+                    person = Person.createMale(args[1], date);
+                    allPeople.add(person);
+                } else {
+                    person = Person.createFemale(args[1], date);
+                    allPeople.add(person);
+                }
+                System.out.println("CREATE - " + person + ", id - " + (allPeople.size() - 1));
+            }
+            case "-r" -> {
+                Person person = allPeople.get(Integer.parseInt(args[1]));
+                String sex;
+
+                if (person.getSex() == Sex.MALE) {
+                    sex = "м";
+                } else {
+                    sex = "ж";
+                }
+                System.out.println("READ - " + person.getName() + " " +
+                        sex + " " + dateFormatPrt.format(person.getBirthDate()));
+            }
+
+            case "-u" -> {
+                Person person = allPeople.get(Integer.parseInt(args[1]));
+
+                person.setName(args[2]);
+                if (args[3].equals("м")) {
+                    person.setSex(Sex.MALE);
+                } else {
+                    person.setSex(Sex.FEMALE);
+                }
+                try {
+                    person.setBirthDate(dateFormat.parse(args[4]));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("UPDATE - " + person);
+            }
+            case "-d" -> {
+                Person person = allPeople.get(Integer.parseInt(args[1]));
+                person.setName(null);
+                person.setSex(null);
+                person.setBirthDate(null);
+                System.out.println("DELETE = " + person);
+            }
+        }
+     }
 }

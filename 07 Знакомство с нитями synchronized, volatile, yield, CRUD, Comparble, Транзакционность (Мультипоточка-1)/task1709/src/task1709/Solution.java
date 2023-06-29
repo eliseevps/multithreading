@@ -1,3 +1,5 @@
+//Complete
+
 package task1709;
 
 /* 
@@ -14,7 +16,7 @@ Requirements:
 */
 
 public class Solution {
-    public static int proposal = 0;
+    public volatile static int proposal = 0;
 
     public static void main(String[] args) {
         new AcceptProposal().start();
@@ -34,8 +36,6 @@ public class Solution {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }
     }
