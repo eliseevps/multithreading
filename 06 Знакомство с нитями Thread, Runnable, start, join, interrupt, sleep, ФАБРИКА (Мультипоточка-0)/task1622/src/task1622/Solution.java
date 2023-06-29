@@ -1,3 +1,5 @@
+//Complete
+
 package task1622;
 
 /* 
@@ -26,8 +28,7 @@ public class Solution {
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < COUNT; i++) {
-            new SleepingThread();
-            //напишите тут ваш код
+            new SleepingThread().join();
         }
     }
 
@@ -44,7 +45,11 @@ public class Solution {
             while (true) {
                 System.out.println(this);
                 if (--countdownIndex == 0) return;
-                //напишите тут ваш код
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    System.out.println("Нить прервана");
+                }
             }
         }
 

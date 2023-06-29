@@ -1,3 +1,5 @@
+//Complete
+
 package task1625;
 
 /* 
@@ -22,6 +24,7 @@ public class Solution {
 
     public static void main(String[] args) throws InterruptedException {
         t1.start();
+        t1.join();
         t2.start();
     }
 

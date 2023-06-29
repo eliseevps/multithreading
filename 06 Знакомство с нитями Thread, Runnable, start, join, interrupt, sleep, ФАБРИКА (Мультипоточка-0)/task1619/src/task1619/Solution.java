@@ -1,3 +1,5 @@
+//Complete
+
 package task1619;
 
 /* 
@@ -15,20 +17,29 @@ Requirements:
 6. Метод main должен вызывать метод ourInterruptMethod.*/
 
 public class Solution {
+    private static TestThread testThread;
+
     public static void main(String[] args) throws InterruptedException {
-        Thread t = new Thread(new TestThread());
+        testThread = new TestThread();
+        Thread t = new Thread(testThread);
         t.start();
         Thread.sleep(3000);
         ourInterruptMethod();
     }
 
     public static void ourInterruptMethod() {
-
+        testThread.setInterrupted(true);
     }
 
     public static class TestThread implements Runnable {
+        private volatile boolean isInterrupted = false;
+
+        public void setInterrupted(boolean interrupted) {
+            isInterrupted = interrupted;
+        }
+
         public void run() {
-            while (true) {
+            while (!isInterrupted) {
                 try {
                     System.out.println("he-he");
                     Thread.sleep(500);

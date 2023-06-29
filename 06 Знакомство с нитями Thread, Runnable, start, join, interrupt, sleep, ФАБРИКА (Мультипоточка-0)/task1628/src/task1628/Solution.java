@@ -1,3 +1,5 @@
+//Complete
+
 package task1628;
 
 import java.io.BufferedReader;
@@ -51,15 +53,25 @@ public class Solution {
         System.out.println("#1:" + consoleReader1);
         System.out.println("#2:" + consoleReader2);
         System.out.println("#3:" + consoleReader3);
-
         reader.close();
     }
 
     public static class ReaderThread extends Thread {
-        private List<String> result = new ArrayList<String>();
+        private volatile List<String> result = new ArrayList<String>();
 
         public void run() {
-            //напишите тут ваш код
+            while (!isInterrupted()) {
+                try {
+                    synchronized (reader) {
+                        if (reader.ready()) {
+                            result.add(reader.readLine());
+                            readStringCount.incrementAndGet();
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Override
@@ -68,3 +80,4 @@ public class Solution {
         }
     }
 }
+

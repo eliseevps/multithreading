@@ -1,3 +1,5 @@
+//Complete
+
 package task1610;
 
 /* 
@@ -25,7 +27,11 @@ public class Solution {
     }
 
     private static void investigateWorld() {
-
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static class Cat extends Thread {
@@ -43,6 +49,8 @@ public class Solution {
             System.out.println(getName() + " родила 2 котят");
             try {
                 initAllKittens();
+                kitten1.join();
+                kitten2.join();
             } catch (InterruptedException e) {
             }
             System.out.println(getName() + ": Все котята в корзинке. " + getName() + " собрала их назад");

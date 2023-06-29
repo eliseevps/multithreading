@@ -1,3 +1,5 @@
+//Complete
+
 package task1626;
 
 /* 
@@ -21,8 +23,26 @@ public class Solution {
         new Thread(new CountUpRunnable(), "Увеличиваем").start();
     }
 
-    public static class CountUpRunnable {
-        //Add your code here - добавь код тут
+    public static class CountUpRunnable implements Runnable {
+        private int countIndexUp = 0;
+
+        @Override
+        public void run() {
+            try {
+                while (true) {
+                    countIndexUp += 1;
+                    System.out.println(this);
+                    if (countIndexUp == Solution.number) return;
+                    Thread.sleep(500);
+                }
+            } catch (InterruptedException e) {
+            }
+
+        }
+
+        public String toString() {
+            return Thread.currentThread().getName() + ": " + countIndexUp;
+        }
     }
 
 

@@ -1,3 +1,5 @@
+//Complete
+
 package task1614;
 
 import java.util.ArrayList;
@@ -55,7 +57,8 @@ public class Solution {
         }
 
         public void printCountdown() throws InterruptedException {
-            //add your code here - добавь код тут
+            System.out.println(list.get(--countFrom));
+            Thread.sleep(500);
         }
     }
 }
